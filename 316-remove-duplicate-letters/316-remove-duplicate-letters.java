@@ -2,11 +2,9 @@ class Solution {
     public String removeDuplicateLetters(String s) {
         HashMap<Character,Integer> hm=new HashMap<Character,Integer>();
         for(int i=0;i<s.length();i++){
-            if(hm.containsKey(s.charAt(i))){
+            
                 hm.put(s.charAt(i),i);
-            }else{
-                 hm.put(s.charAt(i),i);
-            }
+        
         }
         //System.out.print(hm);
        //return "abc";
