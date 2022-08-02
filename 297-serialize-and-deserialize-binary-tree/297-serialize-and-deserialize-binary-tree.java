@@ -8,8 +8,8 @@
  * }
  */
 public class Codec {
-  private static final String spliter = ",";
-    private static final String NN = "X";
+  final String spliter = ",";
+    final String NN = "X";
     
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
