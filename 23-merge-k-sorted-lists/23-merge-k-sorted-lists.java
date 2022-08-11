@@ -27,8 +27,8 @@ class Solution {
             ListNode ele=queue.poll();
             temp.next=ele;
            temp=temp.next;
-            if(temp.next!=null){
-                queue.add(temp.next);
+            if(ele.next!=null){
+                queue.add(ele.next);
             }
         }
         return head.next;
