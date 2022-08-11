@@ -1,6 +1,6 @@
    public class Solution {
             public int findKthLargest(int[] nums, int k) {
-                PriorityQueue<Integer> largeK = new PriorityQueue<Integer>(k+1);
+                PriorityQueue<Integer> largeK = new PriorityQueue<Integer>(k);
     //minheap.
                 for(int el : nums) {
                     if (largeK.size() < k) {
