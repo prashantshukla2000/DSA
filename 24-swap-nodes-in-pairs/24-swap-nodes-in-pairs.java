@@ -16,7 +16,8 @@ class Solution {
         ListNode l3=l2.next;
          l2.next=l1;
          l1.next=l2;
-  l1.next=swapPairs(l3);
+        l1.next=l3;
+         l1.next=swapPairs(l3);
         return l2;
     }
 }
