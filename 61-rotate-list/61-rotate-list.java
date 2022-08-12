@@ -39,7 +39,6 @@ static ListNode rotate(ListNode head){
      ListNode temp2=new ListNode(-1);
     
        temp2.next=temp1.next;
-       //temp2=temp2.next;
        temp1.next=null;
        temp2.next.next=temp3;
        return temp2.next;
