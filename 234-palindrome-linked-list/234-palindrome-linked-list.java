@@ -15,16 +15,17 @@ class Solution {
 if(head==null ||head.next==null)
     return true; 
 ListNode temp=head;
-int count=0,i=0;
-while(temp!=null){
-    count++;
-    temp=temp.next;
-}
-ListNode mid=head;
-while(i<count/2){
-    i++;
-   mid=mid.next;
-}
+// int count=0,i=0;
+// while(temp!=null){
+//     count++;
+//     temp=temp.next;
+// }
+// ListNode mid=head;
+// while(i<count/2){
+//     i++;
+//    mid=mid.next;
+// }
+ListNode mid=middle(head);
 ListNode last=reverse(mid);
 ListNode cur=head;
 while(last!=null){
@@ -53,5 +54,13 @@ head.next=null;
 b.next=a;
 return b;
 }
+    public static ListNode middle(ListNode head){  
+    ListNode fast=head,slow=head;
+    while(fast!=null&&fast.next!=null){
+        fast=fast.next.next;
+        slow=slow.next;
+    }
+    return slow;
+    } 
 }
 
