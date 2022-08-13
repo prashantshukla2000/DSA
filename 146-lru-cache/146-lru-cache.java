@@ -11,13 +11,13 @@ class Node{
 
 
 class LRUCache {
-    Map<Integer,Node> mp=null;
+Map<Integer,Node> mp=null;
 Node head=new Node(-1,-1);
 Node tail=new Node(-1,-1);
 int capacity=0;
 
     public LRUCache(int capacity) {
-          mp=new HashMap<Integer,Node>();
+    mp=new HashMap<Integer,Node>();
     join(head,tail);
     this.capacity=capacity;
         
