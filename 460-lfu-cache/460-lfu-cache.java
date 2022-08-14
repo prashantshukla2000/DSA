@@ -1,3 +1,58 @@
+class ListNode{
+    ListNode prev,next;
+    int val,key,freq;
+    ListNode(){
+        
+    }
+    ListNode(int key,int val){
+        
+            this.key=key;
+        this.val=val;
+    
+        this.freq=1;
+    }
+    
+}
+//Doubly link list to store for a frequency all the keys...
+class DoublyList{
+    Map<Integer,ListNode> map=new HashMap<>();
+    ListNode head,tail;
+    
+   public DoublyList(){
+       head=new ListNode();
+       tail=new ListNode();
+       head.next=tail;
+       tail.prev=head;
+   }
+    public void addNode(ListNode curnode){
+        ListNode tailprev=tail.prev;
+        tailprev.next=curnode;
+        curnode.prev=tailprev;
+        tail.prev=curnode;
+        curnode.next=tail;
+        map.put(curnode.key,curnode);
+    }
+    
+    public ListNode deleteNode(int key){
+        if(!map.containsKey(key))
+            return null;
+        ListNode curnode=map.get(key);
+        ListNode prevnode=curnode.prev;
+        ListNode nextnode=curnode.next;
+        prevnode.next=nextnode;
+        nextnode.prev=prevnode;
+        map.remove(key);
+        return curnode;
+    }
+    
+    public ListNode deleteHead(){
+        if(head.next==tail)
+            return null;
+        ListNode firstNode=head.next;
+        return deleteNode(firstNode.key);
+    }
+}
+
 class LFUCache {
    Map<Integer,ListNode> keymap=new HashMap<>();//for key -Nodes 
  Map<Integer,DoublyList> freqmap=new HashMap<>();//for frequency and the nodes of that frequency........it can acceesd using the keymap.freq as that is same the frequency of freqmap
@@ -67,60 +122,6 @@ class LFUCache {
     }
 }
 
-class ListNode{
-    ListNode prev,next;
-    int val,key,freq;
-    ListNode(){
-        
-    }
-    ListNode(int key,int val){
-        
-            this.key=key;
-        this.val=val;
-    
-        this.freq=1;
-    }
-    
-}
-//Doubly link list to store for a frequency all the keys...
-class DoublyList{
-    Map<Integer,ListNode> map=new HashMap<>();
-    ListNode head,tail;
-    
-   public DoublyList(){
-       head=new ListNode();
-       tail=new ListNode();
-       head.next=tail;
-       tail.prev=head;
-   }
-    public void addNode(ListNode curnode){
-        ListNode tailprev=tail.prev;
-        tailprev.next=curnode;
-        curnode.prev=tailprev;
-        tail.prev=curnode;
-        curnode.next=tail;
-        map.put(curnode.key,curnode);
-    }
-    
-    public ListNode deleteNode(int key){
-        if(!map.containsKey(key))
-            return null;
-        ListNode curnode=map.get(key);
-        ListNode prevnode=curnode.prev;
-        ListNode nextnode=curnode.next;
-        prevnode.next=nextnode;
-        nextnode.prev=prevnode;
-        map.remove(key);
-        return curnode;
-    }
-    
-    public ListNode deleteHead(){
-        if(head.next==tail)
-            return null;
-        ListNode firstNode=head.next;
-        return deleteNode(firstNode.key);
-    }
-}
 
 
 /**
