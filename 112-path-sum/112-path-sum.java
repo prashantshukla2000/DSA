@@ -24,9 +24,10 @@ class Solution {
         }
         sum=sum+root.val;
         if(root.left==null &&root.right==null){
-            return sum==targetSum;
+            return sum==targetSum; //will return true if is leafnode and sum==target ele will return false for that leafnode.
         }
-           return ( f(root.left,sum,targetSum)||f(root.right,sum,targetSum));
+           return f(root.left,sum,targetSum)|| f(root.right,sum,targetSum);
+        //we are only looking for one true so we can put both of them in an or. 
         
     }
 }
