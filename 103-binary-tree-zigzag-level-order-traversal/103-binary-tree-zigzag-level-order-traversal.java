@@ -23,14 +23,11 @@ class Solution {
         boolean lefttoright=true;
         while(!queue.isEmpty()){
             int size=queue.size();
-            List<Integer> row=new ArrayList<>();
+            List<Integer> row=Arrays.asList(new Integer[size]);
             for(int i=0;i<size;i++){
                 TreeNode node=queue.remove();  
-                   if(lefttoright){
-                    row.add(node.val);
-                }else{
-                   row.add(0,node.val);
-                }       
+                   int index = (lefttoright) ? i : (size - 1 - i);
+                row.set(index, node.val);
                 
                 if(node.left!=null)
                     queue.add(node.left);
