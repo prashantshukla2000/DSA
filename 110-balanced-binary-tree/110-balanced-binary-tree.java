@@ -14,11 +14,9 @@
  * }
  */
 class Pair{
-    TreeNode node;
     boolean check;
     int level;
-    Pair(TreeNode _node,boolean _check,int _level){
-        node=_node;
+    Pair(boolean _check,int _level){    
         check=_check;
         level=_level;
     }
@@ -29,14 +27,14 @@ class Solution {
     }
     public Pair f(TreeNode root){
         if(root==null)
-            return (new Pair(root,true,0));
+            return (new Pair(true,0));
     
         Pair left=f(root.left);
         Pair right=f(root.right);
         boolean balanced=false;
     if(left.check==true &&right.check==true &&Math.abs(left.level-right.level)<=1)
         balanced=true;
-        return new Pair(root,balanced,Math.max(left.level,right.level)+1);
+        return new Pair(balanced,Math.max(left.level,right.level)+1);
         
     
     }
