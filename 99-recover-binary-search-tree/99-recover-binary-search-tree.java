@@ -14,10 +14,10 @@
  * }
  */
 class Solution {
-    private TreeNode prev;
-    private TreeNode first;
-    private TreeNode middle;
-    private TreeNode last;
+    public TreeNode prev;
+    public TreeNode first;
+    public TreeNode middle;
+    public TreeNode last;
     
     public void inorder(TreeNode root){
         if(root==null)
