@@ -40,8 +40,6 @@ class Solution {
         }
          al.get(al.size()-1).left=null;
          al.get(al.size()-1).right=null;
-//         for(int i=0;i<al.size()-1;i++){
-//             System.out.println(al.get(i).val+" " +al.get(i).left +" "+al.get(i).right);
-//         }
+
         return al.get(0);
     }}
