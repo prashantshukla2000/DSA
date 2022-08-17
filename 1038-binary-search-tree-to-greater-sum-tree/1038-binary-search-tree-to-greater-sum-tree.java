@@ -16,13 +16,19 @@
 class Solution {
     int sum=0;
     public TreeNode bstToGst(TreeNode root) {
-        //We use reverse Inorder
-        if(root==null)
-            return root;
-        bstToGst(root.right);
-        sum=sum+root.val;
-        root.val=sum;
-       bstToGst(root.left);
+        if(root==null) return root;
+    TreeNode node=root;
+        Stack <TreeNode> s=new Stack<>();
+       while(!s.isEmpty()||node!=null){
+           while(node !=null){
+               s.push(node);
+               node=node.right;
+           }
+           node=s.pop();
+           sum=sum+node.val;
+           node.val=sum;
+           node=node.left;
+       }
 
          return root;
     }
