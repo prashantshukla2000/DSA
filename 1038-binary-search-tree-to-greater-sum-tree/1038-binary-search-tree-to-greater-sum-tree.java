@@ -14,22 +14,42 @@
  * }
  */
 class Solution {
-    int sum=0;
     public TreeNode bstToGst(TreeNode root) {
-        if(root==null) return root;
-    TreeNode node=root;
-        Stack <TreeNode> s=new Stack<>();
-       while(!s.isEmpty()||node!=null){
-           while(node !=null){
-               s.push(node);
-               node=node.right;
-           }
-           node=s.pop();
-           sum=sum+node.val;
-           node.val=sum;
-           node=node.left;
-       }
-
+        //We use reverse Inorder
+        if(root==null)
+         return null;
+        int sum=0;
+        TreeNode node=root;
+        while(node!=null){
+            //no right tree
+          if(node.right==null){
+              sum=sum+node.val;
+              node.val=sum;
+              node=node.left;//We mve our pointer to the left side
+          }  //right tree present
+        else{
+          TreeNode succ=nextGreaterValue(node);  
+            
+            //left is null ,ie, it is unvisited.
+            if(succ.left==null){
+                succ.left=node;
+                node=node.right;
+            }
+            else{            //left is not null--visited
+                     succ.left=null;
+                   sum=sum+node.val;
+                node.val=sum;
+                node=node.left;
+            }
+        }
+        } 
          return root;
     }
+  public TreeNode  nextGreaterValue(TreeNode node){
+      TreeNode succ=node.right;
+      while(succ.left!=null&& succ.left!=node){
+          succ=succ.left;
+      }
+      return succ;
+  }
 }
