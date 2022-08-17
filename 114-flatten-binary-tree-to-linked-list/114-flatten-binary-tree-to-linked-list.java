@@ -14,27 +14,34 @@
  * }
  */
 class Solution {
+        ArrayList<TreeNode> al=new ArrayList<>();
     public void flatten(TreeNode root) {
-        dfs(root);
+        increasingBST(root);
     }
-     public TreeNode dfs(TreeNode root){
-         if(root==null)
-             return null;
-      TreeNode leftTail=  dfs(root.left);
-       TreeNode rightTail =   dfs(root.right);
-         //if left side is empty but right side is not, we dont have to do anything.
-         //if left side is not null and right side is null,we have to insert it to the right side.
-         if(leftTail!=null){
-          leftTail.right=root.right;//aataching the left tail to the right side;
-         root.right=root.left;//the first element for the right side of the root will be its left child;
-         root.left=null; //we set the right left pointer of all nide to null;
-         }
-        TreeNode last=root;
-         if(rightTail!=null)
-          last=rightTail;
-         else if(rightTail==null &&leftTail!=null)
-             last=leftTail;
+
+    public void inorder(TreeNode root)
+    {
+        if(root==null)
+            return;
+        al.add(root);
+        inorder(root.left);
+         inorder(root.right);
+    }
+    public TreeNode increasingBST(TreeNode root) {
+       if(root==null)
+           return null;
+     inorder(root);
+      
         
-         return last;
-     }
-}
+        for(int i=0;i<al.size()-1;i++){
+            
+            al.get(i).right=al.get(i+1);
+            al.get(i).left=null;
+        }
+         al.get(al.size()-1).left=null;
+         al.get(al.size()-1).right=null;
+//         for(int i=0;i<al.size()-1;i++){
+//             System.out.println(al.get(i).val+" " +al.get(i).left +" "+al.get(i).right);
+//         }
+        return al.get(0);
+    }}
