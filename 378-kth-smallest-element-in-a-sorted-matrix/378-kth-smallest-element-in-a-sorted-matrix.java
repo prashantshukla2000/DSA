@@ -4,11 +4,9 @@ PriorityQueue<Integer> queue = new PriorityQueue<Integer>(Collections.reverseOrd
         for(int i=0;i<matrix.length;i++){
             for(int j=0;j<matrix[0].length;j++){
                 queue.add(matrix[i][j]);
+                if(queue.size()>k)
+                    queue.poll();
             }
-        }
-        while(queue.size()>k)
-        {
-            queue.poll();
         }
      return queue.poll();
     }
