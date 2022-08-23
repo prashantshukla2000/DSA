@@ -9,7 +9,7 @@ class Solution {
             int node_b=edge[1];
             int par_a=node_a;
             int par_b=node_b;
-            while(par_a!=parent[par_a]){
+    while(par_a!=parent[par_a]) { //up until we don't find the real parent for a node.we keep moving and checking with the parent array as for real parent, it itself will be its parent
                 par_a=parent[par_a];
             }
              while(par_b!=parent[par_b]){
