@@ -6,6 +6,8 @@ public List<String> generateParenthesis(int n) {
 }
 
 public void dfs(int left, int right, List<String> result, String s) {
+    if(right<left||left==-1||right==-1)
+        return;
     if (left == 0 && right == 0) result.add(s);
     else {
         if (left > 0) dfs(left - 1, right, result, s + "(");
