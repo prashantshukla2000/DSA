@@ -8,7 +8,7 @@ class Solution {
             return true;
         
         ArrayList<Integer>[] graph= makegraph(edges,n);
-        return connectedGraphHasValue(source,destination,graph);
+        return ConnectedGraphs(graph,source,destination);
     }
     public ArrayList<Integer>[] makegraph(int [][]edges,int n){
         ArrayList<Integer>[] list= (ArrayList<Integer>[]) Array.newInstance(ArrayList.class,n);
@@ -25,31 +25,25 @@ class Solution {
  return list;
 }
     
-  private boolean connectedGraphHasValue(Integer nodeValue, Integer searchValue,
-            ArrayList<Integer>[] graph) {
+    public static boolean ConnectedGraphs(ArrayList<Integer>[] graph,int source,int dest){
+        HashSet<Integer> visitedNode=new HashSet<Integer>();
+        Queue<Integer> nodeToVisit =new LinkedList<>();
+        nodeToVisit.add(source);
+        
+        while(nodeToVisit.size()>0){
+            int currentnode=nodeToVisit.poll();
+            visitedNode.add(currentnode);
+            for(int nextNode:graph[currentnode]){
+                if(!visitedNode.contains(nextNode)){
+                    if(nextNode==(dest)){
+                        return true;}
+               nodeToVisit.add(nextNode);
 
-        HashSet<Integer> visitedNodes = new HashSet<>();
-        Queue<Integer> nodesToVisit = new LinkedList<>();
-        nodesToVisit.add(nodeValue);
-
-        // normally, we'd check here, but in this problem, no node connects to itself
-
-        while (nodesToVisit.size() > 0) {
-            Integer currentNode = nodesToVisit.poll();
-            visitedNodes.add(currentNode);
-
-            for (Integer nextNode : graph[currentNode]) {
-                if (!visitedNodes.contains(nextNode)) {
-                    // we can check here to save time
-                    if (nextNode.equals(searchValue)) {
-                        return true;
-                    }
-
-                    nodesToVisit.add(nextNode);
                 }
             }
+            
         }
-
         return false;
     }
 }
+ 
