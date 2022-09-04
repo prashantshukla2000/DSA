@@ -15,15 +15,17 @@ class Solution {
       ListNode back=cut(head);
         back=Reverse(back);
         ListNode front=head;
-        
+        ListNode a=new ListNode(0);
          while(back!=null){
-           ListNode x=back.next;
-           back.next=front.next;
-           front.next=back;
-            front=front.next.next;
-             back=x;
+         a.next=front;
+             front=front.next;
+             a=a.next;
+             a.next=back;
+             back=back.next;
+             a=a.next;
         }
-
+        a.next=front;
+     head=a;
     }
     public ListNode cut(ListNode head){
         ListNode slow=head;
