@@ -1,27 +1,23 @@
 class Solution {
-    public int countSubstrings(String s) {
-        int res=0;
+    public int countSubstrings(String s) {  
+        int start=0,end=0;int odd=0,Even=0;
         for(int i=0;i<s.length();i++){
-            for(int j=i+1;j<=s.length();j++){
-                if(ispalindroe(s.substring(i,j))==true){
-                   // System.out.print(s.substring(i,j));
-                    res++;
-                }
-                    
-            }
-        }
-    return res;
+           odd += lenOfPalidrome(s, i, i);//no .of all odd length palindrom strings possible
+		  Even += lenOfPalidrome(s, i, i+1);//no .of all even length palindrom strings possible
     }
-    public boolean ispalindroe(String s){
-        int l=0,r=s.length()-1;
-        while(l<=r){
-            if(s.charAt(l)==s.charAt(r)){
-                l++;
-                r--;
-            }else{
-                return false;
-            }
-        }
-        return true;
+        		return odd+Even;
+
     }
+    public int lenOfPalidrome(String s, int start, int end) {
+int ans=0;
+		while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+			start--;
+			end++;
+            ans++;
+		}
+
+		return ans;  
+	}
+
+
 }
