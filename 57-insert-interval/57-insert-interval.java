@@ -1,26 +1,20 @@
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        int arr[]=new int[2];
-        arr[0]=newInterval[0];
-         arr[1]=newInterval[1];
+        List<int[]> ans=new ArrayList<>();
+        int start=newInterval[0];
+        int end=newInterval[1];
         
-       List<int []> res=new ArrayList<>();
-        // if(intervals.length==0||intervals==null)
-        //      return res.toArray(new int[0][]);
-     
-        for(int i[] :intervals){
-      if(arr[0]<=i[1]&&arr[0]>=i[0]||(arr[1]>=i[0]&&arr[1]<=i[1])||arr[0]<=i[0]&&arr[1]>=i[1]){
-             arr[0]=Math.min(arr[0],i[0]);
-             arr[1]= Math.max(arr[1],i[1]); 
-  
-            }else{
-                 res.add(new int[]{i[0],i[1]});      
-            }    
+        for(int[] i:intervals){
+            if((start<=i[1]&&start>=i[0])||end>=i[0] &&end<=i[1]||start<=i[0]&&end>=i[1]){//if overlaps keep changing the start and end and we add them at the last
+               start=Math.min(i[0],start);
+               end=Math.max(i[1],end);
+            }else{ // if it does not overlap simply add it
+                ans.add(new int[]{i[0],i[1]});
+            }
         }
-             res.add(new int[]{arr[0],arr[1]});
-              int[][] anss=res.toArray(new int[0][]);
-        
-        Arrays.sort(anss,(a,b) -> a[0]-b[0]);
-      return anss;  
+                    ans.add(new int[]{start,end});
+        int res[][]=ans.toArray(new int[0][]);
+                   Arrays.sort(res,(a,b)->a[0]-b[0]);
+       return res;
     }
 }
