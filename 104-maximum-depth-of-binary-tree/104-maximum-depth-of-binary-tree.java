@@ -15,24 +15,24 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        int level=0;
-        if(root == null)
-             return level;
-       Queue<TreeNode>q=new LinkedList<>();
-        q.add(root);
-        while(!q.isEmpty()){
-             level=level+1;
-           int i=q.size();
-              while(i>0){
-                TreeNode node=q.poll();
-                 if(node.left!=null)
-                   q.add(node.left);
-                   if(node.right!=null)
-                   q.add(node.right);
-                  i--;
-              }
-        }
-        return level;
+       if(root==null)return 0;
+	Stack<TreeNode> s = new Stack<>();
+	HashMap<TreeNode, Integer> hm = new HashMap<>();
+	s.add(root);
+	while(s.size()>0){
+		TreeNode t = s.peek();
+		if(t.left!=null&&!hm.containsKey(t.left)){
+			s.add(t.left);
+		}else if(t.right!=null&&!hm.containsKey(t.right)){
+			s.add(t.right);
+		}else{
+			t = s.pop();
+			int left = hm.getOrDefault(t.left,0);
+			int right = hm.getOrDefault(t.right,0);
+			hm.put(t,Math.max(left,right)+1);
+		}
+	}
+	return hm.get(root);
     } 
 }
    
