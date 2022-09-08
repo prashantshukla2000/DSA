@@ -13,33 +13,33 @@
  *     }
  * }
  */
-
 class Solution {
-    HashMap<Integer,Integer> hm=new  HashMap<Integer,Integer>();
-    int []pre;
+    HashMap<Integer,Integer> hm=new HashMap<Integer,Integer>();
+    int pre[];
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        pre=new int[preorder.length];
         pre=preorder;
         for(int i=0;i<inorder.length;i++){
             hm.put(inorder[i],i);
         }
-        return gettree(0,preorder.length-1,0,inorder.length-1);
+       return helper(0,preorder.length-1,0,preorder.length-1);
     }
-    public TreeNode gettree(int prestart,int preend,int instart, int inend){
-        int inoindex=hm.get(pre[prestart]);
-       int l=inoindex-instart;
-       int r=inend-inoindex;
-      TreeNode root = new TreeNode(pre[prestart]);
-        if(l!=0)
-        root.left=gettree(prestart+1,prestart+l,instart,inoindex-1);
-        else
-            root.left= null;
-        
-          if(r!=0)
-        root.right=gettree(prestart+1+l,preend,inoindex+1,inend);
-        else
-            root.right= null;
-        return root;
-    }
-    
+   public TreeNode  helper(int prestart,int preend ,int instart,int inend){
+       int index=hm.get(pre[prestart]);
+       int l=index-instart;
+       int r=inend-index;
+       TreeNode root=new TreeNode(pre[prestart]);
+       if(l!=0){
+          root.left= helper(prestart+1,prestart+l,instart,index-1);
+           
+       }else{
+           root.left=null;
+       }
+              if(r!=0){
+          root.right= helper(prestart+l+1,preend,index+1,inend);
+           
+       }else{
+           root.right=null;
+       }
+       return root;
+   }
 }
