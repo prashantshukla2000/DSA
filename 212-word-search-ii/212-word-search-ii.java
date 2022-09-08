@@ -26,11 +26,12 @@ class Solution {
             root.addWord(word);
         }
          res=new HashSet<String>();
+         boolean[][] visit = new boolean[board.length][board[0].length];
+
         row=board.length;
         col=board[0].length;
         for(int r=0;r<row;r++){
             for(int c=0;c<col;c++){
-                    boolean[][] visit = new boolean[board.length][board[0].length];
                      dfs(r,c,root,"",visit,board);
             }
         }
