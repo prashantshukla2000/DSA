@@ -14,17 +14,19 @@
  * }
  */
 class Solution {
-    int i=0;
-   int n;
+    int i=0,n;
     public int kthSmallest(TreeNode root, int k) {
-        if(root!=null){
-             kthSmallest( root.left,k) ;
-            i=i+1;
-            if(i==k){
-                n=root.val;
-            }
-             kthSmallest( root.right,k) ;
-        }
-        return n;
+       return dfs(root,k);
     }
+     public int dfs(TreeNode root, int k) {
+         if(root!=null){
+             dfs(root.left,k);
+              i++;
+             if(i==k)
+                n= root.val;
+            else
+             dfs(root.right,k);
+         }
+         return n;
+     }
 }
