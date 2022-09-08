@@ -14,7 +14,8 @@
  * }
  */
 //We can only split once as we can only follow one path ie, fr the main parent of the path it can go left and right ,but it its children have to follow either a left path or an right path(maximum of two) ..or just include the root if includng children will make it negative so we check if it makes the sum smaller than 0 then we ignore its children
-//....but the overall result can be any node which on splitting can give the maximum result so it will be node.val +leftsum+rightsum and it will declared as an lobal variable to reduce calling it every time....in order to choose in negative no we choose the b/w 
+//....but the overall result can be any node which on splitting can give the maximum result so it will be node.val +leftsum+rightsum and it will declared as an lobal variable to reduce calling it every time....
+//in case we didn't want to use a global variable we would return max path with the split and without the slit in each iteration
 //Time...0(n)
 class Solution {
     int result;
