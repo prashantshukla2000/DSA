@@ -24,17 +24,20 @@ class Solution {
        dfs(root);
     return result;
     }
+    
    public int dfs(TreeNode root){
         if(root==null)
             return 0;
-      int left=Math.max(0,dfs(root.left));
-      int right=Math.max(0,dfs(root.right));
-       int leftright=Math.max(left,right);
+      int left=dfs(root.left);
+      left=Math.max(0,left);
+
+       int right=dfs(root.right);
+       right=Math.max(0,right);
       
        //computing the maxpath result withhout the split
        result=Math.max(result,left+right+root.val);
        
        //computing return value for the functin with the split as it can follow only one path for its parent.
-      return leftright+root.val;
+      return Math.max(left,right)+root.val;
     }
 }
