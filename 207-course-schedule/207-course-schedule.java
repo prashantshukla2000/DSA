@@ -1,17 +1,33 @@
 class Solution {
-   public boolean canFinish(int n, int[][] prerequisites) {
-        ArrayList<Integer>[] G = new ArrayList[n];
-        int[] degree = new int[n];
-        ArrayList<Integer> bfs = new ArrayList();
-        for (int i = 0; i < n; ++i) G[i] = new ArrayList<Integer>();
-        for (int[] e : prerequisites) {
-            G[e[1]].add(e[0]);
-            degree[e[0]]++;
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+     int matrix[][]=new int[numCourses][numCourses];
+        int indegree[]=new int[numCourses];
+        for(int i=0;i<prerequisites.length;i++){
+            int a=prerequisites[i][0];
+              int b=prerequisites[i][1];
+            if(matrix[b][a]==0){
+                indegree[a]++;
+                matrix[b][a]=1;
+            }
         }
-        for (int i = 0; i < n; ++i) if (degree[i] == 0) bfs.add(i);
-        for (int i = 0; i < bfs.size(); ++i)
-            for (int j: G[bfs.get(i)])
-                if (--degree[j] == 0) bfs.add(j);
-        return bfs.size() == n;
+        int count=0;
+        Queue<Integer> queue=new LinkedList<>();
+        for(int i=0;i<indegree.length;i++){
+            if(indegree[i]==0){
+                queue.add(i);
+            }
+        }
+        while(!queue.isEmpty()){
+            int ele=queue.poll();
+            count++;
+            for(int i=0;i<numCourses;i++){
+                if(matrix[ele][i]!=0){
+                    if(--indegree[i]==0){
+                        queue.add(i);
+                    }
+                }
+            }
+        }
+        return count==numCourses;
     }
 }
