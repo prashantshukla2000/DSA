@@ -20,13 +20,12 @@ class Node {
 
 class Solution {
     public Node cloneGraph(Node node) {
-        
+              if(node==null)
+            return null;  
       HashMap<Node,Node> oldtonew=new HashMap<>();
         return dfs(node,oldtonew);
     }
     public Node dfs(Node node,HashMap<Node,Node> oldtonew){
-        if(node==null)
-            return null;
         if(oldtonew.containsKey(node)){
             return oldtonew.get(node);
         }
