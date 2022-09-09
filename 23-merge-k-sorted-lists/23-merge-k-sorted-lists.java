@@ -16,18 +16,22 @@ class Solution {
         ListNode head=new ListNode(0);
         ListNode temp=head;
         for(int i=0;i<lists.length;i++){
-            if(lists[i]!=null){
-                queue.add(lists[i]);
+           if(lists[i]!=null){
+            ListNode e= lists[i];
+          while(e!=null){
+                queue.add(e);
+               e=e.next;
             }
+        }
         }
         if(queue.isEmpty())
             return null;
         while(!queue.isEmpty()){
-            ListNode ele=queue.poll();
+           ListNode ele=queue.poll();
+            ele.next=null;
             temp.next=ele;
             temp=temp.next;
-            if(ele.next!=null)
-                queue.add(ele.next);
+           
         }
         return head.next;
     }
