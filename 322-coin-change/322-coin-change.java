@@ -1,30 +1,22 @@
 class Solution {
-    public int coinChange(int[] arr, int x) {
-         Queue<Integer> q = new LinkedList<>();
-    // Base value in queue
-    q.add(x); 
-    // Boolean array to check if  a number has been visited before
-    HashSet<Integer> v = new HashSet<Integer>();
-    // Variable to store depth of BFS
-    int d = 0;int n=arr.length;
-    while (q.size() > 0)
-    {
-        int s = q.size();
-        while (s-- > 0)
-        {
-            int c = q.peek();             // Front most element of the queue
-            // Base case
-            if (c == 0)
-                return d;
-            q.remove();
-            if (v.contains(c) || c < 0)
-                continue;
-            v.add(c);            // Setting current state as visited
-            for (int i = 0; i < n; i++)            // Pushing the required states in queue
-              q.add(c - arr[i]);
+    public int coinChange(int[] coins, int amount) {
+     int[]dp=new int[amount+1] ;//since have to store 0...amt values
+        for(int i=0;i<=amount;i++){
+            dp[i]=Integer.MAX_VALUE;
         }
-        d++;
+       // System.out.println(Integer.MAX_VALUE);
+                dp[0]=0;
+  for(int i=1;i<amount+1;i++){
+ for(int c:coins){
+   if(i-c>=0 && dp[i-c]!=Integer.MAX_VALUE){
+     dp[i]=Math.min(dp[i],1+dp[i-c]);//dp[7]===1+dp[3]
+ }
+      }
     }
-    return -1;
+       
+        if(dp[amount]>=amount+1){
+                      return -1;}
+    return dp[amount];
+
     }
 }
