@@ -5,7 +5,7 @@ class Solution {
             for(int j=0;j<n;j++){
                 if(i==j){
                     l+=mat[i][j];}
-                if(i!=j && i+j==n-1)
+                else if( i+j==n-1)
                     r=r+mat[i][j];
             }
         }
