@@ -1,18 +1,16 @@
-     class Solution {
+class Solution {
     public int uniquePaths(int m, int n) {
-        int arr[][] = new int[m][n];
-        arr[m-1][n-1]=1;
-        for(int i=0;i<m;i++){
-            arr[i][n-1]=1;
+        int row[] = new int [n];//the bottom row
+        for(int i=0;i<n;i++){row[i]=1;}//setting the last row for default all ele=1;
+        for(int r=0;r<m-1;r++){
+            int newrow[] = new int [n];//row above the old bottom row
+             for(int i=0;i<n;i++){newrow[i]=1;} //setting new row each ele as one by default;
+            for(int c=n-2;c>-1;c--){
+                newrow[c] = row[c] + newrow[c+1];
+            }
+            row = newrow;//as we move up our new row becomes our bottom row. 
         }
-          for(int j=0;j<n;j++){
-            arr[m-1][j]=1;
-        }
-        for(int i=m-2;i>=0;i--){
-            for(int j=n-2;j>=0;j--){
-                    arr[i][j] = arr[i+1][j] + arr[i][j+1];
-                }
-        }
-        return arr[0][0];
+        return row[0];
+       
     }
 }
