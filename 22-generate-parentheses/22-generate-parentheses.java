@@ -1,33 +1,21 @@
-//if no of open=no. of close =n then we need to add that to the result set
-//if no. of open is less than n we add ( to the stack
-//if no of close < open then only we add close to )
+class Solution{
+public List<String> generateParenthesis(int n) {
+    List<String> result = new ArrayList<>();
+    dfs(n, n, result, "");
+    return result;
+}
 
-class Solution {
-    Stack<Character> stack=new Stack<Character>();
-    List<String> res=new ArrayList<String>();
-    public List<String> generateParenthesis(int n) {
-        backtrack(0,0,n);
-        return res;
-    }
-    public void backtrack(int open, int close, int n){
-        if(open==n&& close==n)
-        {
-            Iterator i=stack.iterator();
-            String temp="";
-            while(i.hasNext()){
-                temp=temp+i.next();
-            }
-            res.add(temp);
-        }
-        if(open<n){
-            stack.push('(');
-            backtrack(open+1,close,n);
-            stack.pop();
-        }
-        if(close<open){
-            stack.push(')');
-            backtrack(open,close+1,n);
-            stack.pop();
-        }
+public void dfs(int left, int right, List<String> result, String s) {
+    if(right<left||left==-1||right==-1) 
+        return;
+
+ if (left==0 &&right ==0) //if both of them=0 then we correctly reach to a string with n (, )
+            result.add(s);
+    else {
+        if (left > 0) dfs(left - 1, right, result, s + "(");//we go to left side and add open braces
+        if (right > left) dfs(left, right - 1, result, s + ")");//we go to right side and add close braces
+
     }
 }
+}
+
