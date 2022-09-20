@@ -11,7 +11,7 @@ class Solution {
         }
         Arrays.sort(position);
         for(int i=position.length-1;i>=0;i--){
-            double currentTime = (double)(((double)target -position[i] )/hm.get(position[i]));
+            double currentTime = (((double)target -position[i] )/hm.get(position[i]));
              if(!stack.isEmpty()&& currentTime<=stack.peek()){
                        continue;
             }else{
