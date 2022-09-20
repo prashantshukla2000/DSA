@@ -1,37 +1,29 @@
- class Node{
-    int val;
-    int min;
-    Node next;
-    public Node(int val, int min, Node next){
-      this.val=val;
-        this.min=min;
-        this.next=next;
-        
-    }
-}
+
 class MinStack {
-public Node head;
+    Stack<Integer>stack;
+    Stack<Integer>minstack;
     public MinStack() {
-        
+    stack=new Stack<Integer>();
+        minstack=new Stack<Integer>();
     }
     
     public void push(int val) {
-         if (head == null) 
-            head = new Node(val, val, null);
-        else 
-            head = new Node(val, Math.min(val, head.min), head);
+       stack.push(val);
+        val=Math.min(val,(minstack.isEmpty())?val:minstack.peek());
+        minstack.push(val);
     }
     
     public void pop() {
-      head=head.next;  
+      stack.pop();  
+     minstack.pop();
     }
     
     public int top() {
-     return head.val;   
+     return stack.peek();  
     }
     
     public int getMin() {
-       return head.min; 
+       return minstack.peek(); 
     }
 }
 
