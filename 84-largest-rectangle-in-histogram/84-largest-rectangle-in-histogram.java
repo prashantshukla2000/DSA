@@ -36,15 +36,39 @@ class Solution {
   
         
         //for next smallest element
-        public static int[] next(int[] arr,int n){
+//        public static int[] next(int[] arr,int n){
+//
+//  int[] index = new int[n];
+//  Stack<Integer> stack = new Stack<>();
+
+//  for(int i=n-1;i>=0;i--){
+//   if(stack.isEmpty()){
+//   index[i] = n;
+//   }else if(arr[stack.peek()]>=arr[i]){
+//     while(!stack.isEmpty() && arr[stack.peek()]>=arr[i]){
+//           stack.pop();
+//              }
+//             if(stack.isEmpty()){
+//             index[i] = n;
+//              }else{
+//              index[i] = stack.peek();
+//             }
+//   }else{
+//   index[i] = stack.peek();
+//   }
+//   stack.push(i);
+//  }
+//  return index;
+// }
+// }
+
+  public static int[] next(int[] arr,int n){
 
  int[] index = new int[n];
  Stack<Integer> stack = new Stack<>();
 
  for(int i=n-1;i>=0;i--){
-  if(stack.isEmpty()){
-  index[i] = n;
-  }else if(arr[stack.peek()]>=arr[i]){
+  
     while(!stack.isEmpty() && arr[stack.peek()]>=arr[i]){
           stack.pop();
              }
@@ -53,9 +77,7 @@ class Solution {
              }else{
              index[i] = stack.peek();
             }
-  }else{
-  index[i] = stack.peek();
-  }
+ 
   stack.push(i);
  }
  return index;
