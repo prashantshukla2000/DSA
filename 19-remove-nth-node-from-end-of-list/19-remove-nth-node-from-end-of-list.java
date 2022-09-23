@@ -14,8 +14,7 @@ class Solution {
         ListNode t=temp;
         int i=0;
         while(i<n-1){
-         
-                temp=temp.next;
+        temp=temp.next;
             i++;
         }
             temp.next=temp.next.next;
