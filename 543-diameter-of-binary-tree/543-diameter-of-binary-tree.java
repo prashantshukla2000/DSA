@@ -15,17 +15,17 @@
  */
 class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
-        return f(root)[0]-1;
+       return p(root)[0]-1; 
     }
-    public int[] f(TreeNode root ){
+    public int[] p(TreeNode root){
         if(root!=null){
-         int[] left = f(root.left);
-        int[] right = f(root.right);
-           int path=Math.max(Math.max(left[0] ,right[0]),1+left[1]+right[1]);
-            int height = 1 + Math.max(left[1], right[1]); 
-            return new int[]{path,height};
+            int left[]=p(root.left);
+            int right[]=p(root.right);
+            
+            int path=Math.max(1+left[1]+right[1],Math.max(left[0],right[0]));
+            int height=Math.max(left[1],right[1])+1;
+            return  new int[]{path,height};
         }
         return new int[]{0,0};
-        
     }
 }
