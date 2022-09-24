@@ -17,11 +17,15 @@ class Solution {
     int m=0;
     public int maxDepth(TreeNode root) {
      
-        return  max(root);
-    } public int max(TreeNode root) {
+          int i=max(root,0);
+        return m;
+    } public int max(TreeNode root,int i) {
         if(root==null)
         return 0;
-         return Math.max(max(root.left),max(root.right))+1;
+        m=Math.max(m,i+1);
+        max(root.left,i+1);
+        max(root.right,i+1);
+        return i+1;
 }
     
 }
