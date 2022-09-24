@@ -14,25 +14,14 @@
  * }
  */
 class Solution {
+    int m=0;
     public int maxDepth(TreeNode root) {
-       if(root==null)return 0;
-	Stack<TreeNode> s = new Stack<>();
-	HashMap<TreeNode, Integer> hm = new HashMap<>();
-	s.add(root);
-	while(s.size()>0){
-		TreeNode t = s.peek();
-		if(t.left!=null&&!hm.containsKey(t.left)){
-			s.add(t.left);
-		}else if(t.right!=null&&!hm.containsKey(t.right)){
-			s.add(t.right);
-		}else{
-			t = s.pop();
-			int left = hm.getOrDefault(t.left,0);
-			int right = hm.getOrDefault(t.right,0);
-			hm.put(t,Math.max(left,right)+1);
-		}
-	}
-	return hm.get(root);
-    } 
+     
+        return  max(root);
+    } public int max(TreeNode root) {
+        if(root==null)
+        return 0;
+         return Math.max(max(root.left),max(root.right))+1;
 }
-   
+    
+}
