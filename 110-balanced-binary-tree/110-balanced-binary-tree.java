@@ -13,29 +13,21 @@
  *     }
  * }
  */
-class Pair{
-    boolean check;
-    int level;
-    Pair(boolean _check,int _level){    
-        check=_check;
-        level=_level;
-    }
-}
 class Solution {
     public boolean isBalanced(TreeNode root) {
-    return f(root).check;  
-    }
-    public Pair f(TreeNode root){
-        if(root==null)
-            return (new Pair(true,0));
     
-        Pair left=f(root.left);
-        Pair right=f(root.right);
-        boolean balanced=false;
-    if(left.check==true &&right.check==true &&Math.abs(left.level-right.level)<=1)
-        balanced=true;
-        return new Pair(balanced,Math.max(left.level,right.level)+1);
-        
-    
+        Pair<Boolean,Integer> p=f(root); 
+        System.out.println((boolean)p.getKey()+""+(int)p.getValue());
+       return p.getKey();
+
     }
+     public Pair<Boolean,Integer> f(TreeNode root){
+         if(root==null){ return new Pair(true,0); }
+            Pair left =f(root.left);
+            Pair right =f(root.right);
+            boolean balance=false;
+if((boolean)left.getKey()==true&&(boolean)right.getKey()==true &&(Math.abs((int)left.getValue()-(int)right.getValue())<=1)){
+                 balance =true;}
+             return new Pair(balance,(Math.max((int)left.getValue(),(int)right.getValue())+1));       
+     }
 }
