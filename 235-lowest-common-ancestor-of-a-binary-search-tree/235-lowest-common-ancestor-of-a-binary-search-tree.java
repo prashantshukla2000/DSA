@@ -11,23 +11,20 @@
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(q.val<p.val){
-            TreeNode temp=q;
-            q=p;
-            p=temp;
+            TreeNode t=p;
+            p=q;
+            q=t;
         }
-        return dfs(root,p,q);
-            
+        
+       if(root!=null){
+           if(p.val<=root.val&&q.val>=root.val)
+            return root;
+        if(p.val<root.val&&q.val<root.val){
+            return lowestCommonAncestor(root.left,p,q);
+        }else{
+           return lowestCommonAncestor(root.right,p,q);
         }
-        public TreeNode dfs(TreeNode root, TreeNode p, TreeNode q){
-            if(root!=null){
-                if(p.val<=root.val&&q.val>=root.val){
-                    return root;
-                }
-                if(q.val<root.val)
-                  return  dfs(root.left,p,q);
-              else
-                return  dfs(root.right,p,q);
-            }return null;
-        }
-    
+         }
+        return null;
+    }
 }
