@@ -27,7 +27,6 @@ class Solution {
         if(i==k){
             n=root.val;
        }
-        else{
-        dfs(root.right,k);}
+        dfs(root.right,k);
     }
 }
