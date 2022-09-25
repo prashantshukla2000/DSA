@@ -8,40 +8,38 @@
  * }
  */
 public class Codec {
-  final String spliter = ",";
-    final String NN = "X";
-    
+     String splitter=",";
+     String NN="X";
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
       StringBuilder sb=new StringBuilder();
-        buildString(root,sb);
+        get(root,sb);
         return sb.toString();
     }
-     public void buildString(TreeNode node,StringBuilder sb) {
-     if(node==null)
-         sb.append(NN).append(spliter);
-     else{
-          sb.append(node.val).append(spliter);
-    buildString(node.left,sb);
-    buildString(node.right,sb);
-         
-     }
-}
+    public void get(TreeNode root,StringBuilder sb){
+        if(root==null){
+            sb.append(NN).append(splitter);
+        }else{
+            sb.append(root.val).append(splitter);
+            get(root.left,sb);
+            get(root.right,sb);
+        }
+    }
+
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        Deque<String> nodes=new LinkedList<>();
-        nodes.addAll(Arrays.asList(data.split(spliter)));
-        return buildTree(nodes);
-        
+           Deque<String> nodes=new LinkedList<>();
+           nodes.addAll(Arrays.asList(data.split(splitter)));
+           return buildStrings(nodes);
     }
-    public TreeNode buildTree(Deque<String> nodes){
+    public TreeNode buildStrings(Deque<String> nodes){
         String val=nodes.remove();
         if(val.equals(NN))
             return null;
         else{
-            TreeNode node = new TreeNode(Integer.valueOf(val));
-            node.left = buildTree(nodes);
-            node.right = buildTree(nodes);
+            TreeNode node=new TreeNode(Integer.valueOf(val));
+            node.left=buildStrings(nodes);
+            node.right=buildStrings(nodes);
             return node;
         }
     }
