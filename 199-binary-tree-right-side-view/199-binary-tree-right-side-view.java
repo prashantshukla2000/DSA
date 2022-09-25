@@ -15,21 +15,20 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        HashMap<Integer,Integer> hm=new   HashMap<Integer,Integer>();
-        f(root,0,hm);
-        
-        List<Integer> al =new ArrayList();
-        
-        for(Map.Entry<Integer,Integer> entry : hm.entrySet()){
-            al.add(entry.getValue());
-        }
-        return al;
-        
+        HashMap<Integer,Integer> map=new HashMap();
+        dfs(root,0,map);
+        List<Integer> lst=new ArrayList();
+      for(Map.Entry<Integer,Integer> entry:map.entrySet())
+      {
+          lst.add(entry.getValue());
+      }
+        return lst;
     }
-    public void f(TreeNode root,int level,  HashMap<Integer,Integer> hm){
-      if (root!=null){  hm.put(level,root.val);
-        f(root.left,level+1,hm);
-        f(root.right,level+1,hm);}
-
-    }
+   public void dfs(TreeNode root,int height,HashMap<Integer,Integer> map){
+        if(root==null)
+            return;
+        map.put(height,root.val);
+       dfs(root.left,height+1,map);
+       dfs(root.right,height+1,map);
+   }
 }
