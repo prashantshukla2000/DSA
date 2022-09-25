@@ -16,17 +16,18 @@
 class Solution {
     int i=0,n;
     public int kthSmallest(TreeNode root, int k) {
-       return dfs(root,k);
+        dfs(root,k);
+        return n;
     }
-     public int dfs(TreeNode root, int k) {
-         if(root!=null){
-             dfs(root.left,k);
-              i++;
-             if(i==k)
-                n= root.val;
-            else
-             dfs(root.right,k);
-         }
-         return n;
-     }
+    public void dfs(TreeNode root,int k){
+        if(root==null)
+            return ;
+        dfs(root.left,k);
+        i++;
+        if(i==k){
+            n=root.val;
+       }
+        else{
+        dfs(root.right,k);}
+    }
 }
