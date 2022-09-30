@@ -9,9 +9,9 @@ class Solution {
         
         int count=0;
         while(!queue.isEmpty()){
-        int k=n+1;
+        int k=n;
        List<Map.Entry> tempList = new ArrayList<>();
-            while(k>0 && !queue.isEmpty() )
+            while(k>=0 && !queue.isEmpty() )
             {
                 Map.Entry<Character,Integer> top=queue.poll();
                 top.setValue(top.getValue()-1);
@@ -26,7 +26,7 @@ class Solution {
         }
            if(queue.isEmpty()) break;
             
-            count=count+k;
+            count=count+(k+1);
         }
         return count;
     }
