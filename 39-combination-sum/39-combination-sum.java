@@ -1,22 +1,24 @@
 class Solution {
+    int c[];
+    int t;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> sol = new ArrayList<>();
-        List<Integer> list = new ArrayList<>();
-        dfs(sol, 0, list, candidates, target);
-        return sol;
+        c=candidates;
+        t=target;
+        List<List<Integer>> ans=new ArrayList<>();
+        List <Integer> res=new ArrayList<>();
+        dfs(ans,res,0,0);
+        return ans;
     }
-    
-    public void dfs(List<List<Integer>> sol ,int curr, List<Integer> list, int[] nums, int k){
-        if(k<0)
-            return;
-        if(k==0){
-            sol.add(new ArrayList<>(list));
+    public void dfs(List<List<Integer>> ans,List<Integer> res, int i,int total){
+        if(total==t){
+            ans.add(new ArrayList<>(res));
             return;
         }
-        for(int i=curr;i<nums.length;i++){
-            list.add(nums[i]);
-            dfs(sol, i, list, nums, k-nums[i]);
-            list.remove(list.size()-1);
-        }
+        if(i>=c.length||total>t)
+            return;
+        res.add(c[i]);
+        dfs(ans,res,i,total+c[i]);
+        res.remove(res.size()-1);
+        dfs(ans,res,i+1,total);
     }
 }
