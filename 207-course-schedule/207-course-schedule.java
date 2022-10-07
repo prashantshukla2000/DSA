@@ -5,10 +5,10 @@ class Solution {
         for(int i=0;i<prerequisites.length;i++){
             int a=prerequisites[i][0];
               int b=prerequisites[i][1];
-            if(matrix[b][a]==0){
+           // if(matrix[b][a]==0){
                 indegree[a]++;
                 matrix[b][a]=1;
-            }
+            //}
         }
         int count=0;
         Queue<Integer> queue=new LinkedList<>();
