@@ -1,55 +1,43 @@
 class Solution {
-
-    public int ladderLength(
-        String beginWord,
-        String endWord,
-        List<String> wordList
-    ) {
-        Map<String, List<String>> adjlist = new HashMap<>();
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Map<String,List<String>> adjlist=new HashMap<>();
         wordList.add(beginWord);
-        for (String word : wordList) {
-            StringBuilder string = null;
-            for (int i = 0; i < word.length(); i++) {
-                string = new StringBuilder(word);
-                string.setCharAt(i, '*');
-                List<String> wordlist = adjlist.getOrDefault(
-                    string.toString(),
-                    new ArrayList<String>()
-                );
-                wordlist.add(word);
-                adjlist.put(string.toString(), wordlist);
+        for(String word:wordList){
+            StringBuilder string=null;
+            for(int i=0;i<word.length();i++){
+                string=new StringBuilder(word);
+                string.setCharAt(i,'*');
+                List<String> templist=adjlist.getOrDefault(string.toString(),new ArrayList<String>());
+                templist.add(word);
+                adjlist.put(string.toString(),templist);
             }
         }
-
-        Queue<String> queue = new LinkedList<>();
-        queue.offer(beginWord);
-        Set<String> visited = new HashSet<>();
-        visited.add(beginWord);
-        int step = 1;
-        StringBuilder string = null;
-        while (!queue.isEmpty()) {
+        
+        Queue<String> q=new LinkedList<>();
+        Set<String> set=new HashSet<>();
+        q.add(beginWord);
+        set.add(beginWord);
+        int step=1;
+        StringBuilder string=null;
+        while(!q.isEmpty()){
             step++;
-            int size = queue.size();
-            for (int j = 0; j < size; j++) {
-                String str = queue.poll();
-
-                for (int i = 0; i < str.length(); i++) {
-                    string = new StringBuilder(str);
-                    string.setCharAt(i, '*');
-                    for (String pat : adjlist.get(string.toString())) {
-                        if (pat.equals(endWord)) {
+            int size=q.size();
+            for(int j=0;j<size;j++){
+                String word=q.poll();
+                for(int i=0;i<word.length();i++){
+                   string=new StringBuilder(word);
+                   string.setCharAt(i,'*'); 
+                    for(String neigh:adjlist.get(string.toString())){
+                        if(neigh.equals(endWord))
                             return step;
-                        }
-                        if (visited.contains(pat)) {
+                        if(set.contains(neigh))
                             continue;
-                        }
-                        queue.offer(pat);
-                        visited.add(pat);
+                        q.add(neigh);
+                        set.add(neigh);
                     }
                 }
             }
-            // step++;
         }
-        return 0;
+       return 0; 
     }
 }
