@@ -6,9 +6,10 @@ class Solution {
         Stack<String> stack = new Stack<>();
 
         for (List<String> ticket : tickets) {
-            graph
-                .computeIfAbsent(ticket.get(0), k -> new PriorityQueue<>())
-                .add(ticket.get(1));
+            PriorityQueue<String> temp=graph.getOrDefault(ticket.get(0),new PriorityQueue<>());
+            temp.add(ticket.get(1));
+            graph.put(ticket.get(0),temp);
+           
         }
 
         stack.push("JFK");
@@ -23,6 +24,7 @@ class Solution {
                 stack.push(graph.get(nextDestination).poll());
             } else {
                 itinerary.addFirst(stack.pop());
+                
             }
         }
         return itinerary;
