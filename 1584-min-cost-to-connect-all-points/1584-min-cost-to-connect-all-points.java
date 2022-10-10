@@ -1,34 +1,36 @@
 class Solution {
-    public int minCostConnectPoints(int[][] points) {
-        int n=points.length;int ans=0;
-      PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->a[0]-b[0]); 
-        for(int i=0;i<n;i++)//run for all nodes node 0,node 1..node n
-        {
-            for(int j=i+1;j<n;j++){//calculating the mmanhatten dist for nodes in point
-                 pq.add(new int[]{ Math.abs(points[i][0] - points[j][0]) + Math.abs(points[i][1] - points[j][1]), i, j });  
-                
-            }
-        }
-        int parent[]=new int[n];
-        for(int i=0;i<n;i++){
-            parent[i]=i;
-        }
-        while(n>1){
-          int a[]=  pq.poll();
-            int dist=a[0];
-            int i=a[1];
-            int j=a[2];
-            int par_i=parent[i];
-            int par_j=parent[j];
-            while(parent[par_i]!=par_i)par_i=parent[par_i];
-            while(parent[par_j]!=par_j)par_j=parent[par_j];
-            if(par_i!=par_j){
-                parent[par_i]=par_j;
-                ans=ans+dist;
-                 n--;
-            }
-        }
-        return ans;
 
+    // Time Complexity: O(N^2 log(N)) where N is the length of points. N^2 comes from the fact we need to find the distance between a currNode and every other node to pick the shortest distance. log(N) comes from Priority Queue
+    // Space Complexity: O(N^2)
+    public int minCostConnectPoints(int[][] points) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]); // edge weight, the index of next node
+        pq.offer(new int[] { 0, 0 });
+        int len = points.length;
+        Set<Integer> visited = new HashSet<>();
+        int cost = 0;
+
+        // When visited.size() == points.len meaning that all the nodes has been connected.
+        while (visited.size() < len) {
+            int[] arr = pq.poll();
+
+            int weight = arr[0];
+            int currNode = arr[1];
+
+            if (visited.contains(currNode)) continue;
+
+            visited.add(currNode);
+            cost += weight;
+
+            for (int nextNode = 0; nextNode < len; nextNode++) {
+                if (!visited.contains(nextNode)) {
+                    int nextWeight =
+                        Math.abs(points[nextNode][0] - points[currNode][0]) +
+                        Math.abs(points[nextNode][1] - points[currNode][1]);
+                    pq.offer(new int[] { nextWeight, nextNode });
+                }
+            }
+        }
+
+        return cost;
     }
 }
