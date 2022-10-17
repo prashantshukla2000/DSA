@@ -5,11 +5,11 @@ class Solution {
         int start=intervals[0][0];
         int end= intervals[0][1];
         for(int i[]:intervals){
-            if(i[0]>=end){
-                        end=i[1];
-            }else{
-                        count++;
+            if(i[0]<end){
+                count++;
                 end=Math.min(end,i[1]);
+            }else{
+                end=i[1];
             }
         }
         return count-1;
