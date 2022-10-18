@@ -8,15 +8,14 @@ class Solution {
       return  dfs(0,0,a,b,map);
     }
     public int dfs(int i,int j,String a,String b, HashMap<String,Integer> map){
-         if(i==a.length()&&j==b.length()) return 0;    
+         if(i==a.length()&&j==b.length()) return 0;    //if strings are null
+        // When one of two indexes reaches its end, we just need to apply `word2.length() - index2 insertions` or `word1.length() - index1` more operations to the other word
     if ((i== a.length() && j != b.length())) return b.length() -j; 
 	if ((i != a.length() && j == b.length())) return a.length() -i;
-        String key=i+"-"+j;
+        String key=i+"-"+j;int c;
         if(map.containsKey(key)) return map.get(key);
         if(a.charAt(i)==b.charAt(j)){
-           int c=dfs(i+1,j+1,a,b,map);
-            map.put(key,c);
-            return c;
+            c=dfs(i+1,j+1,a,b,map);
         }else{
             //deletion...we delete the character so we move i forward but j remains as still have o find that character at j in sting a...+1 as t took 1 operation to del it
            int delete = 1 + dfs(i+1, j,a,b,map);
@@ -24,10 +23,8 @@ class Solution {
             int insert = 1 + dfs(i, j+1,a,b,map);
             //try replacing...then we put a new character so i is moved and now j matches so j is moved..1added as it took 1 move to replace it
             int replace = 1 +dfs(i+1, j+1,a,b,map);
-            int c=Math.min(Math.min(delete,replace),insert);
-            map.put(key,c); 
+            c=Math.min(Math.min(delete,replace),insert);
+        }map.put(key,c); 
             return c;
-            
-        }
     }
 }
