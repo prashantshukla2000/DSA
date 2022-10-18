@@ -1,30 +1,32 @@
-class Solution {
-    public int minDistance(String a, String b) {
-        if(a.length()==0||b.length()==0)            
-            return Math.max(a.length(),b.length());
-            if(a.length()==0 && b.length()==0)
+public class Solution {
+    public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        if (m == 0 && n== 0) {
             return 0;
-      HashMap<String,Integer> map=new HashMap<>();
-      return  dfs(0,0,a,b,map);
-    }
-    public int dfs(int i,int j,String a,String b, HashMap<String,Integer> map){
-         if(i==a.length()&&j==b.length()) return 0;    //if strings are null
-        // When one of two indexes reaches its end, we just need to apply `word2.length() - index2 insertions` or `word1.length() - index1` more operations to the other word
-    if ((i== a.length() && j != b.length())) return b.length() -j; 
-	if ((i != a.length() && j == b.length())) return a.length() -i;
-        String key=i+"-"+j;int c;
-        if(map.containsKey(key)) return map.get(key);
-        if(a.charAt(i)==b.charAt(j)){
-            c=dfs(i+1,j+1,a,b,map);
-        }else{
-            //deletion...we delete the character so we move i forward but j remains as still have o find that character at j in sting a...+1 as t took 1 operation to del it
-           int delete = 1 + dfs(i+1, j,a,b,map);
-            //insertion in it character is put so j is increased as matched but i still their
-            int insert = 1 + dfs(i, j+1,a,b,map);
-            //try replacing...then we put a new character so i is moved and now j matches so j is moved..1added as it took 1 move to replace it
-            int replace = 1 +dfs(i+1, j+1,a,b,map);
-            c=Math.min(Math.min(delete,replace),insert);
-        }map.put(key,c); 
-            return c;
+        }
+        //one of the strings are null
+        if (m == 0 || n == 0) {
+            return Math.max(m, n);
+        }
+        int[][] cost = new int[m + 1][n + 1];
+        for(int i = 0; i <m+1; i++)
+            cost[i][n] = (m)-i;
+        for(int i = 1; i <= n; i++)
+            cost[m][i] = (n)-i;
+        
+        for(int i = m-1; i>=0; i--) {
+            for(int j=n-1; j >=0; j--) {
+                if(word1.charAt(i) == word2.charAt(j))
+                    cost[i ][j] = cost[i+1][j+1];
+                else {
+                  int a =1+ cost[i + 1][j];
+                    int b = 1+cost[i][j+1];
+                    int c = 1+cost[i+1][j + 1];
+                    cost[i][j] = Math.min(Math.min(a,b),c);
+                }
+            }
+        }
+        return cost[0][0];
     }
 }
