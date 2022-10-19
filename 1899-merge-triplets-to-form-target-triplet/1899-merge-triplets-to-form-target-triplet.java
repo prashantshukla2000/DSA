@@ -8,10 +8,10 @@ class Solution {
             if(val[0]==a)flag1=true;
             if(val[1]==b)flag2=true;
             if(val[2]==c)flag3=true;
-             
-        } if(flag1==true&&flag2==true&&flag3==true)
+          if(flag1==true&&flag2==true&&flag3==true)
             return true;
-      
+         
+        } 
         return false;
     }
 }
