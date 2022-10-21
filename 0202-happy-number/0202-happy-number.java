@@ -1,23 +1,24 @@
 class Solution {
     public boolean isHappy(int n) {
-        int sum=n,a=n;
-    if (n == 1 || n == 7)
-        return true;
-        while(sum>9){
-            sum=0;
-        while(a>0){
-        int rem=a%10;
-        sum=sum+rem*rem;
-            a=a/10;
-        }
-        
-             if (sum == 1)
+    HashSet<Integer> st = new HashSet<>();
+    while (true) {
+        n = numSquareSum(n);
+        if (n == 1)
             return true;
-                a=sum;
-        }
-       if (sum == 7)
-        return true;
-         
-    return false;
+        if (st.contains(n))
+            return false;
+        st.add(n);
     }
+    }
+    static int numSquareSum(int n)
+{
+    int squareSum = 0;
+    while (n!= 0)
+    {
+        squareSum += (n % 10) *
+                     (n % 10);
+        n /= 10;
+    }
+    return squareSum;
+}
 }
