@@ -1,14 +1,13 @@
 class Solution {
-    public boolean canJump(int[] nums) {
-        int goal=nums.length-1;
-        for(int i=nums.length-1;i>=0;i--){
-            if(i+nums[i]>=goal){
-                goal=i;
-            }
-        }
-            if(goal==0)
-                return true;
-            return false;
-        
+    public boolean canJump(int[] arr) {
+        int goal=arr.length-1;
+for(int j=arr.length-2;j>=0;j--)
+{if(arr[j]+j>=goal){
+    goal=j;
+}
+}
+if(goal==0)
+return true;
+return false;
     }
 }
