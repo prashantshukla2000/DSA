@@ -33,27 +33,21 @@ class GFG
 
 class Solution
 {
-	int  select(int arr[], int min_index)
-	{
-       for(int j=min_index+1;j<arr.length;j++)
-	    {if(arr[j]<arr[min_index]){
-	        min_index=j;
-	    }
-	}	   return min_index; 
-
-	}
-	
 	void selectionSort(int arr[], int n)
 	{
 	    //code here
 	    for(int i=0;i<n-1;i++){
-	      int min_index=select(arr,i)  ;
-	        
-	    int temp=arr[min_index];
+	      int min_index=i  ;
+	      for(int j=i+1;j<n;j++)//finding the minimum from i to end of array
+	      {
+	        if(arr[j]<arr[min_index]){
+	        min_index=j;
+	        }
+	      }
+	    int temp=arr[min_index]; //swap th minimum ele with ele ..finding the roght pos. for minimum ele firsr
 	    arr[min_index]=arr[i];
 	    arr[i]=temp;
 
-	        
 	    }
 	}
 }
