@@ -1,25 +1,29 @@
 class Solution {
-    public void rotate(int[] nums, int k) {
-              int a[]=new int [k];
-        int n=nums.length;
+    // Function to Rotate k elements to left
+    public void rotate(int[] arr, int k) {
+         int n=arr.length;
         if (n == 0)
-             return;
-         k = k % n;
-        if (k > n)
-         return;
-
-        int j=0; //store the ele right of k
-        for(int i=n-k;i<n;i++){
-            a[j]=nums[i];
-            j++;
-        }
-        
-       for (int i = n - k - 1; i >= 0; i--) { //shiftt the ele left k elements
-       nums[i + k] = nums[i];
-        }
-        
-        for(int i=0;i<k;i++){
-            nums[i]=a[i];
-        }
+    return;
+  k = k % n;
+  if (k > n)
+    return;
+  // Reverse first n-k elements
+  Reverse(arr, 0, n - k - 1);
+  // Reverse last k elements
+  Reverse(arr, n - k, n - 1);
+  // Reverse whole array
+  Reverse(arr, 0, n - 1);
     }
+  void Reverse(int arr[], int start, int end)
+{
+  while (start <= end)
+  {
+    int temp = arr[start];
+    arr[start] = arr[end];
+    arr[end] = temp;
+    start++;
+    end--;
+  }
+}
+
 }
