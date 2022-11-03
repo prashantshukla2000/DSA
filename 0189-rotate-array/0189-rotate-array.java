@@ -3,20 +3,21 @@ class Solution {
               int a[]=new int [k];
         int n=nums.length;
         if (n == 0)
-    return;
-  k = k % n;
-  if (k > n)
-    return;
+             return;
+         k = k % n;
+        if (k > n)
+         return;
 
-        int j=0;
+        int j=0; //store the ele right of k
         for(int i=n-k;i<n;i++){
             a[j]=nums[i];
             j++;
         }
-       for (int i = n - k - 1; i >= 0; i--)
-        {
+        
+       for (int i = n - k - 1; i >= 0; i--) { //shiftt the ele left k elements
        nums[i + k] = nums[i];
         }
+        
         for(int i=0;i<k;i++){
             nums[i]=a[i];
         }
