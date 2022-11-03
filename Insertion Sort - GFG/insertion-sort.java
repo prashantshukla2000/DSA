@@ -38,7 +38,6 @@ class Sorting
 
 class Solution
 {
-  
   //Function to sort the array using insertion sort algorithm.
   public void insertionSort(int a[], int n)
   {
