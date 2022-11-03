@@ -33,26 +33,26 @@ class GFG
 
 class Solution
 {
-	int  select(int arr[], int i)
+	int  select(int arr[], int min_index)
 	{
-       return 0; // code here such that selectionSort() sorts arr[]
+       for(int j=min_index+1;j<arr.length;j++)
+	    {if(arr[j]<arr[min_index]){
+	        min_index=j;
+	    }
+	}	   return min_index; 
+
 	}
 	
 	void selectionSort(int arr[], int n)
 	{
 	    //code here
 	    for(int i=0;i<n-1;i++){
-	        int min_index=i;
-	        for(int j=i+1;j<n;j++)
-	    {if(arr[j]<arr[min_index]){
-	        min_index=j;
-	    }
-	    }
+	      int min_index=select(arr,i)  ;
+	        
 	    int temp=arr[min_index];
 	    arr[min_index]=arr[i];
 	    arr[i]=temp;
-	        
-	    
+
 	        
 	    }
 	}
